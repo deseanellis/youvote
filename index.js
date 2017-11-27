@@ -45,10 +45,6 @@ require('./routes/auth')(app);
 require('./routes/poll')(app);
 require('./routes/validation')(app);
 
-app.get('/auth/google', (req, res) => {
-  res.send({ test: true });
-});
-
 if (process.env.NODE_ENV === 'production') {
   //Express will serve production assets
   app.use(express.static('client/build'));
