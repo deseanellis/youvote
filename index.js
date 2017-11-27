@@ -5,7 +5,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const sslRedirect = require('heroku-ssl-redirect');
 
 //Dependencies -> Custom Project Modules
 const Keys = require('./config').keys;
@@ -24,7 +23,6 @@ app.set('view engine', 'pug');
 
 //Apply Global Middleware
 app.use(bodyParser.json());
-app.use(sslRedirect());
 app.use(
   '/profile/images',
   express.static(path.join(__dirname + '/avatar_uploads'))
@@ -54,11 +52,10 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
-} /*
-else {
- app.use(express.static('client/public'));
+} else {
+  app.use(express.static('client/public'));
 }
-*/
+
 //Listener and Port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
