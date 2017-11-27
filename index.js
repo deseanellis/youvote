@@ -22,10 +22,6 @@ app.set('view engine', 'pug');
 
 //Apply Global Middleware
 app.use(bodyParser.json());
-app.use(
-  '/profile/images',
-  express.static(path.join(__dirname + '/avatar_uploads'))
-);
 
 //Apply and Configure Partial Middleware
 app.use(
@@ -49,6 +45,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   const path = require('path');
+
+  app.use(
+    '/profile/images',
+    express.static(path.join(__dirname + '/avatar_uploads'))
+  );
+
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
