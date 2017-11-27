@@ -45,7 +45,7 @@ require('./routes/auth')(app);
 require('./routes/poll')(app);
 require('./routes/validation')(app);
 
-app.get('auth/google', (req, res) => {
+app.get('/auth/google', (req, res) => {
   res.send({ test: true });
 });
 
