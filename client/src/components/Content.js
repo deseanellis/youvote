@@ -169,7 +169,7 @@ class Content extends Component {
                   component={ResendValidation}
                   exact
                 />
-                <Route component={NotFound} />
+                {/*<Route component={NotFound} />*/}
               </Switch>
             </div>
           </BrowserRouter>}
