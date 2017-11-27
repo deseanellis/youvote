@@ -49,7 +49,7 @@ require('./routes/validation')(app);
 
 if (process.env.NODE_ENV === 'production') {
   //Express will serve production assets
-  app.use(express.static('client/build'));
+  //app.use(express.static('client/build'));
 
   app.get('/', (req, res) => {
     res.send('Hello World!');
