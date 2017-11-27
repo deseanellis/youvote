@@ -24,7 +24,7 @@ app.set('view engine', 'pug');
 
 //Apply Global Middleware
 app.use(bodyParser.json());
-//app.use(sslRedirect());
+app.use(sslRedirect());
 app.use(
   '/profile/images',
   express.static(path.join(__dirname + '/avatar_uploads'))
