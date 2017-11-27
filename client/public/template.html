@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#48386b">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style/styles.css" />
+    <title>YouVote | End-User Voting Application</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <div class="main-container">
+        <div class="sidebar-container">
+          <div class="logo-container">
+            <img src="images/youvote_logo_white.png" class="img-fluid" />
+            <div class="actions">
+              <button class="btn--action-menu-close"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="sidebar-body">
+            <div class="user-details">
+              <div class="image-container">
+                <img src="images/placeholder_user.jpg" class="img-fluid rounded-circle" />
+              </div>
+              <div class="information">John Doe</div>
+            </div>
+            <div class="nav-menu">
+              <div class="menu-item-1">
+                <div class="heading">
+                  <div class="icon"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+                  <div class="title"> My Polls</div>
+                  <div class="caret"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                </div>
+                <ul class="list-heading-1">
+                  <li><a href="#">Create New Poll</a></li>
+                  <li><a href="#">View My Polls</a></li>
+                  <li><a href="#">View Polls Voted On</a></li>
+                </ul>
+              </div>
+              <div class="menu-item-2">
+                <div class="heading">
+                  <div class="icon"><i class="fa fa-id-card-o" aria-hidden="true"></i></div>
+                  <div class="title"> My Profile</div>
+                  <div class="caret"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                </div>
+                <ul class="list-heading-2">
+                  <li><a href="#">Basic Information</a></li>
+                  <li><a href="#">Change Password</a></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-container">
+          <div class="header-container">
+            <div class="actions">
+              <button class="btn--action-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            </div>
+            <div class="searchbar">
+              <input type="text" name="keywords" class="searchbar" placeholder="#xf002 Search" />
+            </div>
+            <div class="actions">
+              <button class="btn--action-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div class="content-body">
+            <div class="content-box">
+              <div class="title">Basic Information</div>
+              <div class="body">
+                <p>Use the form below to update your personal information.<br /><i>Please note that social network linked accounts (Google, Facebook, GitHub) information can only be view and not updated.</i></p>
+                <form action="#" enctype="multipart/form-data">
+                  <div class="container-fluid">
+                    <div class="row form">
+                      <div class="col-sm-10 offset-sm-1" ><input type="text" placeholder="First Name" name="firstName" /></div>
+                    </div>
+                    <div class="row form">
+                      <div class="col-sm-10 offset-sm-1" ><input type="text" placeholder="Last Name" name="lastName" /></div>
+                    </div>
+                    <div class="row form">
+                      <div class="col-sm-10 offset-sm-1" ><input type="email" placeholder="E-Mail" name="email" /></div>
+                    </div>
+                    <div class="row form group">
+                      <p>Browse and select your profile image.<br /><i style="color: red">Accepted file types (jpg, jpeg, png). File size must be less than 500kb.</i></p>
+                      <div class="col-sm-8 offset-sm-1" >
+                        <input type="text" placeholder="Upload Profile Picture" name="avatar_holder" id="avatar_holder" />
+                      </div>
+                      <div class="col-sm-2 image-uploader">
+                        <button class="btn--upload-image" type="button" title="Upload Profile Picture"><i class="fa fa-upload" aria-hidden="true"></i> Browse</button>
+                        <input type="file" id="avatar" name="avatar" accept="image/jpeg, image/png" />
+                      </div>
+                    </div>
+                    <div class="row form">
+                      <div class="col-sm-10 offset-sm-1"><button type="button" class="main submit">Update My Profile</button></div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script>
+  $(document).ready(function() {
+  $('button[class*="btn--action-menu"]').on('click', function() {
+    $('.sidebar-container').toggleClass('show-menu');
+    $('.btn--action-menu-close').toggleClass('show');
+    $('.content-container').toggleClass('show-menu');
+    //$(this).find('i.fa').toggleClass('fa-bars fa-times');
+  });
+
+  $('div[class*="menu-item-"] .title').on('click', function() {
+    var self = this;
+    var parent = $(self).parents('div[class*="menu-item-"]');
+    $(
+      `.list-heading-${$(parent)
+        .prop('class')
+        .substring($(parent).prop('class').length - 1)}`
+    ).slideToggle(400, 'swing', function() {
+      //Animation Complete
+      $(parent).find('.caret > i').toggleClass('fa-chevron-down fa-chevron-up');
+    });
+  });
+  /*
+    $('.btn--upload-image').on('click', function() {
+      console.log('clicked');
+      $('#avatar').click();
+    });
+    */
+  /*
+    $('#avatar').on('change', function() {
+      if (this.files.length > 0) {
+        var file = this.files[0];
+        $('#avatar_holder').val(file.name);
+      }
+    });*/
+});
+</script>
+  </body>
+</html>

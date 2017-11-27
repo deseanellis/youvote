@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+      margin-top: 40px !important;
+      background-color: #f7f7f7 !important;
+      font-family: 'Verdana' !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      }
+      img {
+        width: 300px !important;
+        height: auto !important;
+      }
+      .rounded {
+        margin-top: 20px !important;
+        border-radius: 5px !important;
+        border-top: 4px solid #48386b !important;
+        max-width: 500px !important;
+        background-color: #ffffff !important;
+        padding: 30px !important;
+      }
+      .actions {
+        margin: 30px 0px 30px 0px !important;
+      }
+      .btn-action {
+        background-color: #f39b3e !important;
+        padding: 15px !important;
+        color: #FFF !important;
+        text-decoration: none !important;
+      }
+      .btn-action:hover {
+        background-color: #d88936 !important;
+      }
+    </style>
+  </head>
+  <body><img src="https://mlab.com/base/img/mLab-logo-dark.svg">
+    <div class="rounded">
+      <p>Hello {{fullName}},</p>
+      <p>A request was received to re-send a validation/verification link to complete your registration with the YouVote application</p>
+      <p>Click the following link below to verify your account <span style="font-weight: bold; font-style: italic">(This link will expire after 24 hours)</span>:</p>
+      <div class="actions"><a href='{{userLink}}' class="btn-action" target="_blank">Verify E-mail</a></div>
+      <p style="font-style: italic; color: #30a1e8">Please do not reply to this e-mail message or to the listed sender.</p>
+      <div>
+        <p style="margin-top: 40px">
+          Thanks,
+          <br />
+          <strong>YouVote Application Team</strong>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

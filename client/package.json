@@ -1,0 +1,43 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": {
+    "/auth/google": {
+      "target": "http://localhost:5000"
+    },
+    "/api/*": {
+      "target": "http://localhost:5000"
+    },
+    "/profile/images/*": {
+      "target": "http://localhost:5000"
+    }
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bootstrap": "^4.0.0-beta.2",
+    "chart.js": "^2.7.1",
+    "dateformat": "^3.0.2",
+    "hashids": "^1.1.4",
+    "lodash": "^4.17.4",
+    "nice-color-palettes": "^2.0.0",
+    "react": "^16.0.0",
+    "react-chartjs-2": "^2.6.4",
+    "react-dom": "^16.0.0",
+    "react-modal": "^3.1.2",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-form": "^7.1.1",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.14"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

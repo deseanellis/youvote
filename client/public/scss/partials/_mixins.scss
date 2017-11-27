@@ -1,0 +1,236 @@
+@mixin google-font($font) {
+  $font: unquote($font);
+  @import url('https://fonts.googleapis.com/css?family=#{$font}');
+}
+
+@mixin disable-input-outline {
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+  }
+}
+
+@mixin clean-links {
+  a {
+    &:link,
+    &:active,
+    &:visited,
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin modals($width: 250px) {
+  .modalOverlayOverwrite {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  }
+  .modalOverwrite {
+    min-width: $width;
+    /* height: 100px; */
+    position: absolute;
+    /* align-items: center; */
+    /* justify-content: center; */
+    top: 40px;
+    /*left: calc(100vw /2);
+    right: calc(100vw /2);*/
+    bottom: unset;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+  }
+}
+
+@mixin custom-checkboxes($checkbox-color) {
+  input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+    z-index: 12;
+    width: 18px;
+    height: 18px;
+    &:checked,
+    &:focus {
+      outline: none !important;
+    }
+    + .lbl {
+      position: relative;
+      z-index: 11;
+      display: inline-block;
+      margin: 0;
+      line-height: 20px;
+      min-height: 14px;
+      min-width: 14px;
+      font-weight: normal;
+    }
+
+    + .lbl.padding-8::before {
+      margin-right: 8px;
+    }
+  }
+
+  input[type=checkbox] + .lbl::before {
+    font-family: fontAwesome;
+    font-weight: normal;
+    font-size: 11px;
+    color: $checkbox-color;
+    content: "\a0";
+    background-color: #fff;
+    border: 1px solid $checkbox-color;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    height: 13px;
+    line-height: 13px;
+    min-width: 13px;
+    margin-right: 1px;
+    margin-top: -5px;
+  }
+
+  input[type=checkbox]:checked + .lbl::before {
+    display: inline-block;
+    content: '\f00c';
+    background-color: #fff;
+    border-color: #ccc;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+      inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+  }
+
+  input[type=checkbox]:hover + .lbl::before,
+  input[type=checkbox] + .lbl:hover::before {
+    border-color: $checkbox-color;
+  }
+
+  input[type=checkbox]:active + .lbl::before,
+  input[type=checkbox]:checked:active + .lbl::before {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  input[type=checkbox]:disabled + .lbl::before,
+  input[type=checkbox][disabled] + .lbl::before,
+  input[type=checkbox].disabled + .lbl::before {
+    background-color: #ddd !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    color: #bbb;
+  }
+}
+
+@mixin custom-radio-buttons($checkmark-color) {
+  .custom-radio {
+    list-style: none;
+    max-width: 400px;
+    /* Hide the browser's default radio button */
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    /* Create custom checkmark*/
+    .checkmark {
+      position: absolute;
+      top: -0.5px;
+      left: -10px;
+      height: 20px;
+      width: 20px;
+      background-color: transparent;
+      border-radius: 50%;
+      border: 3px solid darken($bg-color-primary, 40%);
+    }
+
+    /* On mouse-over, add a grey background color */
+    input[type="radio"] {
+      &:hover {
+        ~ .checkmark {
+          background-color: #ccc;
+        }
+      }
+    }
+
+    /* When the radio button is checked, add a purple background */
+    input[type="radio"]:checked ~ .checkmark {
+      border-color: $checkmark-color;
+      background-color: #fff;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    input[type="radio"]:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .checkmark:after {
+      top: 2.5px;
+      left: 2.5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: $checkmark-color;
+    }
+  }
+}
+
+@mixin social-buttons($colors-list: $bg-color-facebook $bg-color-google $bg-color-github, $socials-list: facebook google gitHub) {
+  @each $current-color in $colors-list {
+    $i: index($colors-list, $current-color);
+    $s: nth($socials-list, $i);
+    div.row.social-options > div[class="option--#{$s}"] {
+      background: linear-gradient(
+        to top,
+        $current-color,
+        lighten($current-color, 5%)
+      );
+      color: $text-color-secondary;
+      div.social-text {
+        span:nth-child(1)::before {
+          content: 'Sign in';
+          font-weight: bold;
+        }
+        span:nth-child(2)::before {
+          content: capitalize($s);
+          font-weight: bold;
+        }
+        span:nth-child(1)::after {
+          content: ' with ';
+        }
+      }
+      &:hover {
+        background: linear-gradient(
+          to bottom,
+          $current-color,
+          lighten($current-color, 5%)
+        );
+      }
+    }
+  }
+}

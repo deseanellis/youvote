@@ -1,0 +1,14 @@
+export const GET_USER = 'GET_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const REGISTER_USER = 'REGISTER_USER';
+export const CREATE_POLL = 'CREATE_POLL';
+export const EDIT_POLL = 'EDIT_POLL';
+export const GET_POLL = 'GET_POLL';
+export const REG_VOTE = 'REG_VOTE';
+export const GET_ALL_POLLS = 'GET_ALL_POLLS';
+export const ADD_TO_POLL_LIST = 'ADD_TO_POLL_LIST';
+export const DELETE_POLLS = 'DELETE_POLLS';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const GET_EDIT_POLL = 'GET_EDIT_POLL';
+export const SEARCH_POLLS = 'SEARCH_POLLS';

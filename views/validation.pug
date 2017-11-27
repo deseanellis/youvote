@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+  head
+    if redirect
+        |
+        script.
+          window.setTimeout(() => {
+          window.location = "#{redirectLink}";
+          }, 3000);
+        |
+    title YouVote - Voting Application
+    style.
+      body {
+      text-align: center;
+      margin-top: 40px;
+      background-color: #f7f7f7;
+      font-family: 'Verdana';
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      }
+      img {
+        width: 300px;
+        height: auto;
+      }
+      .rounded {
+        margin-top: 20px;
+        border-radius: 5px;
+        border: 1px solid #ededed;
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 60px 30px 60px 30px;
+      }
+  body
+    img(src='/images/youvote_logo.png')
+    div.rounded
+      h1= message
+      if returnLink
+        span= returnLink.message + ' '
+        a(href= returnLink.href) here
