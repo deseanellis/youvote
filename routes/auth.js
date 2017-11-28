@@ -202,7 +202,6 @@ module.exports = app => {
 
   //Route Handler: Get Current User JSON
   app.get('/api/user', (req, res) => {
-    console.log('Request received for user information!');
     if (req.user) {
       return res.json({
         success: true,

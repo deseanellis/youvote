@@ -1,4 +1,5 @@
 const axios = require('axios');
+const URI = require('../config').uri;
 
 module.exports = async function(req, res, next) {
   //Validate User Inputs
@@ -28,9 +29,7 @@ async function validateForm(obj) {
       //Validate Password
       if (regexPassword.test(password)) {
         //Validate against duplicated emails
-        var user = await axios.get(
-          `http://localhost:5000/api/user/checkemail/${email}`
-        );
+        var user = await axios.get(`${URI.home}/api/user/checkemail/${email}`);
         if (user.data.success && !user.data.exists) {
           return true;
         }
