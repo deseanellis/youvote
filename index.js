@@ -3,6 +3,7 @@ const express = require('express');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const sslRedirect = require('heroku-ssl-redirect');
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -23,6 +24,7 @@ app.set('view engine', 'pug');
 
 //Apply Global Middleware
 app.use(bodyParser.json());
+app.use(sslRedirect()); // enable forced ssl redirect
 app.use(
   '/profile/images',
   express.static(path.join(__dirname + '/avatar_uploads'))
