@@ -21,8 +21,13 @@ class SinglePoll extends Component {
   }
 
   componentDidMount() {
-    const { getPoll, match: { params } } = this.props;
+    const { currentPoll, getPoll, match: { params } } = this.props;
     getPoll(params.id);
+
+    //Set Page Title
+    if (currentPoll) {
+      document.title = `YouVote | ${currentPoll.title}`;
+    }
   }
 
   componentDidUpdate(prevProps) {
