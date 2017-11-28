@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const handlebars = require('handlebars');
 const htmlToText = require('html-to-text');
 const mongoose = require('mongoose');
+const path = require('path');
 const { sendMail } = require('../functions');
 const CryptoJS = require('crypto-js');
 const CryptoKey = require('../config').keys.crypto;
@@ -31,8 +32,12 @@ module.exports = app => {
 
         //Build Reset Link
         var userLink = `${URI.home}/changepassword/${user.resetToken}/${user.email}`;
-        var templatePath =
-          __dirname + '\\..\\email_templates\\password_reset.html';
+        var templatePath = path.join(
+          __dirname,
+          '..',
+          'email_templates',
+          'password_reset.html'
+        );
         var emailConfig = {
           service: Mail.HOTMAIL.service,
           user: Mail.HOTMAIL.user,
@@ -70,8 +75,12 @@ module.exports = app => {
       if (user) {
         //Build User Link
         var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-        var templatePath =
-          __dirname + '\\..\\email_templates\\initialsend.html';
+        var templatePath = path.join(
+          __dirname,
+          '..',
+          'email_templates',
+          'initialsend.html'
+        );
         var emailConfig = {
           service: Mail.HOTMAIL.service,
           user: Mail.HOTMAIL.user,
@@ -118,7 +127,12 @@ module.exports = app => {
 
           //Build User Link
           var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-          var templatePath = __dirname + '\\..\\email_templates\\resend.html';
+          var templatePath = path.join(
+            __dirname,
+            '..',
+            'email_templates',
+            'resend.html'
+          );
           var emailConfig = {
             service: Mail.HOTMAIL.service,
             user: Mail.HOTMAIL.user,
