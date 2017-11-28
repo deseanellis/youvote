@@ -32,8 +32,7 @@ module.exports = app => {
 
         //Build Reset Link
         var userLink = `${URI.home}/changepassword/${user.resetToken}/${user.email}`;
-        var templatePath = path.join(
-          __dirname,
+        var templatePath = path.resolve(
           '..',
           'email_templates',
           'password_reset.html'
@@ -75,8 +74,7 @@ module.exports = app => {
       if (user) {
         //Build User Link
         var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-        var templatePath = path.join(
-          __dirname,
+        var templatePath = path.resolve(
           '..',
           'email_templates',
           'initialsend.html'
@@ -127,8 +125,7 @@ module.exports = app => {
 
           //Build User Link
           var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-          var templatePath = path.join(
-            __dirname,
+          var templatePath = path.resolve(
             '..',
             'email_templates',
             'resend.html'
