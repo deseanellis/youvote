@@ -32,5 +32,10 @@ module.exports = {
       service: $ev.MAIL_SERVICE,
       pass: $ev.MAIL_PASS
     }
+  },
+  cloudinary: {
+    cloud_name: $ev.CLOUDINARY_NAME,
+    api_key: $ev.CLOUDINARY_CLIENTID,
+    api_secret: $ev.CLOUDINARY_CLIENTSECRET
   }
 };
