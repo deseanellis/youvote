@@ -32,9 +32,9 @@ module.exports = app => {
 
         //Build Reset Link
         var userLink = `${URI.home}/changepassword/${user.resetToken}/${user.email}`;
-        var templatePath = path.resolve(
-          '..',
-          'email_templates',
+        var templatePath = path.join(
+          __dirname,
+          '../email_templates',
           'password_reset.html'
         );
         var emailConfig = {
@@ -74,9 +74,9 @@ module.exports = app => {
       if (user) {
         //Build User Link
         var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-        var templatePath = path.resolve(
-          '..',
-          'email_templates',
+        var templatePath = path.join(
+          __dirname,
+          '../email_templates',
           'initialsend.html'
         );
         var emailConfig = {
@@ -125,9 +125,9 @@ module.exports = app => {
 
           //Build User Link
           var userLink = `${URI.home}/api/validation/?email=${user.email}&code=${user.validationCode}`;
-          var templatePath = path.resolve(
-            '..',
-            'email_templates',
+          var templatePath = path.join(
+            __dirname,
+            '../email_templates',
             'resend.html'
           );
           var emailConfig = {
