@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { Helmet } from 'react-helmet';
 import NiceColorPalettes from 'nice-color-palettes';
 import { Doughnut } from 'react-chartjs-2';
 import * as actions from '../../actions';
@@ -23,11 +24,6 @@ class SinglePoll extends Component {
   componentDidMount() {
     const { currentPoll, getPoll, match: { params } } = this.props;
     getPoll(params.id);
-
-    //Set Page Title
-    if (currentPoll) {
-      document.title = `YouVote | ${currentPoll.title}`;
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -58,6 +54,9 @@ class SinglePoll extends Component {
     } else {
       return (
         <div className="content-box">
+          <Helmet>
+            <title>{`YouVote | ${currentPoll.title}`}</title>
+          </Helmet>
           <div className="title">
             {user._id === currentPoll.user &&
               <button
