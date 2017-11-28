@@ -1,5 +1,6 @@
 //Dependencies -> NPM Modules
 const express = require('express');
+const cors = require('cors');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
@@ -42,22 +43,20 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (process.env.NODE_ENV === 'production') {
-  //var whitelist = [URI.home];
-  var whitelist = [URI.home];
-  var corsOptions = {
-    origin: function(origin, callback) {
-      console.log(origin);
-      if (whitelist.indexOf(origin) === -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+//var whitelist = [URI.home];
+var whitelist = [];
+var corsOptions = {
+  origin: function(origin, callback) {
+    console.log(origin);
+    if (whitelist.indexOf(origin) === -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
-  };
+  }
+};
 
-  app.use(cors(corsOptions));
-}
+app.use(cors(corsOptions));
 
 //Direct Import Services and Routes
 require('./services'); //All Passport Services
