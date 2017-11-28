@@ -1,1 +1,1 @@
-console.log('avatar files');
+console.log('tmp avatar files directory');

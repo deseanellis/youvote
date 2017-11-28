@@ -105,10 +105,8 @@ class Sidebar extends Component {
     if (!user || !user.avatar) {
       return `${process.env.PUBLIC_URL}/images/placeholder_user.jpg`;
     }
-    if (user.isSocial) {
-      return user.avatar;
-    }
-    return `/profile/images/${user.avatar}`;
+
+    return user.avatar;
   }
 
   getUserName(user) {

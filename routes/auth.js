@@ -10,6 +10,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const cloudinary = require('cloudinary');
 
 //Middlewares
 const validateRegistration = require('../middleware/validateRegistration');
@@ -18,8 +19,14 @@ const requireLogin = require('../middleware/requireLogin');
 //Crypto Key
 const CryptoKey = require('../config').keys.crypto;
 
+//Cloudinary Configuration
+const CloudinaryConfig = require('../config').cloudinary;
+
 //Models
 const User = mongoose.model('users');
+
+//Apply Cloudinary Configuration
+cloudinary.config(CloudinaryConfig);
 
 /************Auth Routes*************/
 module.exports = app => {
@@ -153,7 +160,16 @@ module.exports = app => {
         if (user) {
           //Check if profile picture needs to update
           if (req.file) {
-            user.avatar = req.file.filename;
+            var cloudinaryRes = await cloudinary.uploader.upload(
+              req.file.path,
+              {
+                crop: 'crop',
+                width: 500,
+                height: 500
+              }
+            );
+
+            user.avatar = cloudinaryRes.secure_url;
             user = await user.save();
           }
           if (req.params.type === 'password') {
