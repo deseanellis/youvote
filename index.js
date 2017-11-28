@@ -43,10 +43,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 if (process.env.NODE_ENV === 'production') {
+  //var whitelist = [URI.home];
   var whitelist = [URI.home];
   var corsOptions = {
     origin: function(origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
+      console.log(origin);
+      if (whitelist.indexOf(origin) === -1) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
