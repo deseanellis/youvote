@@ -10,6 +10,7 @@ const path = require('path');
 //Dependencies -> Custom Project Modules
 const Keys = require('./config').keys;
 const Database = require('./config').database;
+const URI = require('./config').uri;
 
 //DB Connections
 mongoose.connect(Database.connectionString);
@@ -40,6 +41,21 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+if (process.env.NODE_ENV === 'production') {
+  var whitelist = [URI.home];
+  var corsOptions = {
+    origin: function(origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
+  };
+
+  app.use(cors(corsOptions));
+}
 
 //Direct Import Services and Routes
 require('./services'); //All Passport Services
