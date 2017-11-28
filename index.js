@@ -1,6 +1,5 @@
 //Dependencies -> NPM Modules
 const express = require('express');
-const cors = require('cors');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
@@ -12,6 +11,7 @@ const path = require('path');
 const Keys = require('./config').keys;
 const Database = require('./config').database;
 const URI = require('./config').uri;
+const blockCORS = require('./middleware/blockCORS');
 
 //DB Connections
 mongoose.connect(Database.connectionString);
@@ -43,7 +43,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
+//Block CORS
+app.use((req, res, next) => {
+  blockCORS(req, res, next);
+});
 
 //Direct Import Services and Routes
 require('./services'); //All Passport Services
