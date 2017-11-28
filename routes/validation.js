@@ -95,7 +95,10 @@ module.exports = app => {
         if (response) {
           return res.json({ success: true });
         }
-        return res.json({ success: false, warning: 'E-Mail delivery error' });
+        return res.json({
+          success: false,
+          warning: `Account created. Validation email delivery error occured. Click to <a href="/resend/validation/${email.trim()}">re-send validation e-mail</a>`
+        });
       }
       return res.json({
         success: false,
