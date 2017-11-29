@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loadAvatarError: false
+    };
+  }
+
   render() {
     const { user } = this.props;
-
     return (
       <div className="sidebar-container">
         <div className="logo-container">
@@ -28,11 +34,16 @@ class Sidebar extends Component {
           <div className="user-details">
             <div className="image-container">
               <img
-                src={this.getUserImage(user)}
+                src={
+                  !this.state.loadAvatarError
+                    ? this.getUserImage(user)
+                    : this.getUserImage()
+                }
                 style={{ cursor: 'pointer' }}
-                className="img-fluid rounded-circle"
+                className="img-fluid rounded-circle user-avatar"
                 alt="avatar"
                 onClick={() => (window.location = '/basicinformation')}
+                onError={() => this.errorUserImage(true)}
               />
             </div>
             <div
@@ -107,6 +118,12 @@ class Sidebar extends Component {
     }
 
     return user.avatar;
+  }
+
+  errorUserImage(loadAvatarError) {
+    this.setState({
+      loadAvatarError
+    });
   }
 
   getUserName(user) {

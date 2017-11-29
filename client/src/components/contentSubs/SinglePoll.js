@@ -22,7 +22,7 @@ class SinglePoll extends Component {
   }
 
   componentDidMount() {
-    const { currentPoll, getPoll, match: { params } } = this.props;
+    const { getPoll, match: { params } } = this.props;
     getPoll(params.id);
   }
 
