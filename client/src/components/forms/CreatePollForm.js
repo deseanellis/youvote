@@ -13,6 +13,9 @@ import { validateCreatePoll } from './validation';
 
 import TableCheckbox from '../componentSubs/TableCheckbox';
 
+//Limt of Options
+const OPTIONS_LIMIT = 20;
+
 class CreatePollForm extends Component {
   constructor() {
     super();
@@ -186,7 +189,7 @@ class CreatePollForm extends Component {
     });
 
     if (emptyOption) return false;
-    if (options.length === 20) return false;
+    if (options.length === OPTIONS_LIMIT) return false;
     //Push new option
     options.push({ value: '' });
 

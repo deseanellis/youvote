@@ -49,7 +49,6 @@ class CreatePoll extends Component {
           params.mode === 'edit'
             ? `Edit Poll: ${poll.currentPoll.title}`
             : 'Create a New Poll';
-        console.log(poll.currentPoll);
         return (
           <div className="content-box">
             <div className="title">
