@@ -46,7 +46,6 @@ class SinglePoll extends Component {
       match: { params },
       regVote
     } = this.props;
-    console.log('Testing current poll status infomation', currentPoll);
     if (currentPoll === null) {
       return <PageLoader />;
     } else if (currentPoll === false) {
@@ -58,7 +57,8 @@ class SinglePoll extends Component {
             <title>{`YouVote | ${currentPoll.title}`}</title>
           </Helmet>
           <div className="title">
-            {user._id === currentPoll.user &&
+            {user &&
+              user._id === currentPoll.user &&
               <button
                 className="btn--edit-poll"
                 type="button"
