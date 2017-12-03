@@ -46,7 +46,7 @@ class SinglePoll extends Component {
       match: { params },
       regVote
     } = this.props;
-
+    console.log('Testing current poll status infomation', currentPoll);
     if (currentPoll === null) {
       return <PageLoader />;
     } else if (currentPoll === false) {
