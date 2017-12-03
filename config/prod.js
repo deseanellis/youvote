@@ -31,6 +31,12 @@ module.exports = {
       user: $ev.MAIL_USER,
       service: $ev.MAIL_SERVICE,
       pass: $ev.MAIL_PASS
+    },
+    MAILGUN: {
+      service: 'MAILGUN',
+      user: $ev.MAILGUN_USER,
+      key: $ev.MAILGUN_KEY,
+      domain: $ev.MAILGUN_DOMAIN
     }
   },
   cloudinary: {
