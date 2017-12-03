@@ -80,7 +80,8 @@ module.exports = app => {
           'initialsend.html'
         );
         var emailConfig = {
-          service: Mail.HOTMAIL.service,
+          service: Mail.MAILGUN.service,
+          /*service: Mail.HOTMAIL.service,*/
           user: Mail.HOTMAIL.user,
           pass: Mail.HOTMAIL.pass,
           from: Mail.HOTMAIL.user,
