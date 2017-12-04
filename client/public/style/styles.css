@@ -244,6 +244,10 @@ div.main-container {
    flex: 1 1 auto;
 }
 
+div.main-container .fa-check {
+   color: #4f8a10;
+}
+
 div.main-container div.actions button[class*="btn--action-"] {
    width: 60px;
    height: 60px;

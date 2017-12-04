@@ -17,6 +17,8 @@ class SinglePoll extends Component {
     super();
 
     this.state = {
+      submitButtonText: 'Submit Vote',
+      submitButtonSuccess: false,
       loader: false
     };
   }
@@ -32,6 +34,14 @@ class SinglePoll extends Component {
         this.setState({
           loader: false
         });
+      }
+      if (this.props.requestReceived > 1) {
+        if (this.props.chartPoll !== prevProps.chartPoll) {
+          this.setState({
+            submitButtonText: 'Vote Submitted ',
+            submitButtonSuccess: true
+          });
+        }
       }
     }
   }
@@ -84,15 +94,26 @@ class SinglePoll extends Component {
               <div className="container-fluid">
                 <div className="row form">
                   <div className="col-sm-10 offset-sm-1">
-                    <ul className="custom-radio">
+                    <ul
+                      className="custom-radio"
+                      onClick={() =>
+                        this.setState({
+                          submitButtonText: 'Submit Vote',
+                          submitButtonSuccess: false
+                        })}
+                    >
                       {this.renderFields(currentPoll.options)}
                     </ul>
                   </div>
                 </div>
                 <div className="row form">
                   <div className="col-sm-10 offset-sm-1">
-                    <SubmitButton classes="main submit" loader={state.loader}>
-                      Submit Vote
+                    <SubmitButton
+                      classes="main submit"
+                      loader={state.loader}
+                      submitButtonSuccess={state.submitButtonSuccess}
+                    >
+                      {state.submitButtonText}
                     </SubmitButton>
                   </div>
                 </div>

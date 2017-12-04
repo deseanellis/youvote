@@ -74,6 +74,9 @@ div.main-container {
   height: 100%;
   padding: 0px;
   flex: 1 1 auto;
+  .fa-check {
+    color: $message-color-success;
+  }
   div.actions {
     button[class*="btn--action-"] {
       width: $header-height;

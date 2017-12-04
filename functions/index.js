@@ -8,7 +8,7 @@ var MAILGUN = require('../config').mail.MAILGUN;
 if (process.env.NODE_ENV !== 'production') {
   MAILGUN = require('../config').mail.MAILGUN.sandbox;
 }
-console.log(MAILGUN);
+
 const mailgun = require('mailgun-js')({
   apiKey: MAILGUN.key,
   domain: MAILGUN.domain
@@ -44,9 +44,10 @@ myFunctions.sendMail = async function(templatePath, config, replacements) {
   }
 
   //Remove mandatory fields for MAILGUN
-  if (config.SERVICE === 'MAILGUN') {
-    delete configProps.user;
-    delete configProps.pass;
+  if (config.service === 'MAILGUN') {
+    configProps.splice(configProps.indexOf('user'), 1);
+    configProps.splice(configProps.indexOf('pass'), 1);
+    configProps.splice(configProps.indexOf('from'), 1);
   }
 
   //Check for missing fields
@@ -58,6 +59,9 @@ myFunctions.sendMail = async function(templatePath, config, replacements) {
   });
 
   try {
+    var html = await myFunctions.readHTMLFile(templatePath);
+    html = handlebars.compile(html)(replacements);
+
     //Configure Mail Options
     var mailOptions = {
       from: `YouVote Application <${config.from}>`,
@@ -69,10 +73,8 @@ myFunctions.sendMail = async function(templatePath, config, replacements) {
 
     var transError = false;
 
-    if (config.SERVICE !== 'MAILGUN') {
+    if (config.service !== 'MAILGUN') {
       //Get HTML email and apply handlebars
-      var html = await myFunctions.readHTMLFile(templatePath);
-      html = handlebars.compile(html)(replacements);
 
       var configObj = {
         service: config.service,
@@ -105,6 +107,7 @@ myFunctions.sendMail = async function(templatePath, config, replacements) {
       }
     } else {
       mailOptions.from = `YouVote Application <${MAILGUN.user}>`;
+
       var response = await mailgun.messages().send(mailOptions);
       console.log(response);
       if (response.error) {

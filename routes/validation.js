@@ -38,10 +38,10 @@ module.exports = app => {
           'password_reset.html'
         );
         var emailConfig = {
-          service: Mail.HOTMAIL.service,
+          service: Mail.MAILGUN.service,
+          from: Mail.HOTMAIL.user,
           user: Mail.HOTMAIL.user,
           pass: Mail.HOTMAIL.pass,
-          from: Mail.HOTMAIL.user,
           to: email.trim(),
           subject: 'YouVote Application - Reset Your Account Password'
         };
@@ -81,10 +81,9 @@ module.exports = app => {
         );
         var emailConfig = {
           service: Mail.MAILGUN.service,
-          /*service: Mail.HOTMAIL.service,*/
+          from: Mail.HOTMAIL.user,
           user: Mail.HOTMAIL.user,
           pass: Mail.HOTMAIL.pass,
-          from: Mail.HOTMAIL.user,
           to: email.trim(),
           subject: 'YouVote Application - Validate Your E-Mail Address'
         };
@@ -106,6 +105,7 @@ module.exports = app => {
         error: 'No user found'
       });
     } catch (ex) {
+      console.log(ex);
       return res.json({ success: false, exception: ex });
     }
   });
@@ -118,10 +118,7 @@ module.exports = app => {
       var user = await User.findOne({ email: email.trim() });
       if (user) {
         var validationExpiration = new Date(user.validationExpiration);
-        if (
-          !user.validated &&
-          new Date().getTime() > validationExpiration.getTime()
-        ) {
+        if (!user.validated) {
           //Update User Validation Code and Expiration
           user.validationCode = user.validationCodeBuilder();
           user.validationExpiration = user.expiryDateBuilder(1);
@@ -135,10 +132,10 @@ module.exports = app => {
             'resend.html'
           );
           var emailConfig = {
-            service: Mail.HOTMAIL.service,
+            service: Mail.MAILGUN.service,
+            from: Mail.HOTMAIL.user,
             user: Mail.HOTMAIL.user,
             pass: Mail.HOTMAIL.pass,
-            from: Mail.HOTMAIL.user,
             to: email.trim(),
             subject: 'YouVote Application - Validate Your E-Mail Address'
           };
@@ -154,8 +151,7 @@ module.exports = app => {
         }
         return res.json({
           success: false,
-          error:
-            'User e-mail address has been previously validated or previously sent validation has not expired'
+          error: 'User e-mail address has been previously validated'
         });
       }
     } catch (ex) {

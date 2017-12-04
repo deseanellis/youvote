@@ -5,9 +5,12 @@ class SubmitButton extends Component {
     const tabIndex = this.props.tabIndex
       ? { tabIndex: this.props.tabIndex }
       : {};
+
     return (
       <button type="submit" className={this.props.classes}>
         {this.props.children}
+        {this.props.submitButtonSuccess &&
+          <i className="fa fa-check" aria-hidden="true" />}
         <i
           className="fa fa-circle-o-notch fa-spin fa-fw"
           style={{ display: this.props.loader ? 'inline-block' : 'none' }}
