@@ -128,7 +128,11 @@ class Sidebar extends Component {
 
   getUserName(user) {
     if (user) {
-      return { __html: user.fullName };
+      let __html = user.fullName;
+      if (user.fullName === 'Guest');
+      __html +=
+        '<br /><div style="margin-top: 4px"><a href="/register">Sign In/Register</a><div>';
+      return { __html };
     }
     return { __html: '' };
   }

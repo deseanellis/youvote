@@ -587,6 +587,16 @@ div.sidebar-container {
         }
       }
       .information {
+        text-align: center;
+        a {
+          color: $action-color-primary;
+          font-weight: bold;
+          padding: 5px;
+          border-radius: 4px;
+          &:hover {
+            background-color: lighten($bg-color-secondary, 15%);
+          }
+        }
       }
     }
     div.nav-menu {
