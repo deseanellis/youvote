@@ -122,6 +122,9 @@ div.content-container {
     align-items: center;
     flex-grow: 1;
     padding: 40px 20px 40px 20px;
+    @include breakpoint($xs) {
+      justify-content: unset;
+    }
     div.content-box {
       table {
         th.data-field {
