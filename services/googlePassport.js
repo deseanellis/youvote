@@ -25,7 +25,7 @@ passport.use(
         lastName: profile.name.familyName,
         firstName: profile.name.givenName,
         email: profile.emails[0].value,
-        avatar: profile._json.image.url,
+        avatar: profile._json.image.url.replace(/sz=50/, 'sz=500'),
         validated: true
       };
 
