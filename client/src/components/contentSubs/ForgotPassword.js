@@ -46,8 +46,8 @@ class ForgotPassword extends Component {
             onClickHandler={this.hideAlert}
           />}
         <p style={{ marginTop: '5px' }}>
-          No problem. Enter your email here and we'll send you a link to reset
-          it.
+          Enter your email address here and we'll send you a recovery link to
+          reset your password.
         </p>
         <form
           onSubmit={handleSubmit(values => {
