@@ -68,6 +68,15 @@ class PollsViewer extends Component {
           return n.key === 'actions';
         });
         break;
+      case 'popular':
+        this.setTitle(
+          '<i class="fa fa-fire" aria-hidden="true"></i> Most Popular Polls'
+        );
+        this.props.getAllPolls(true, { field: 'voterCount', sorted: -1 });
+        _.remove(headers, n => {
+          return n.key === 'actions';
+        });
+        break;
       default:
         this.setTitle('All Polls');
         this.props.getAllPolls(true);
@@ -106,9 +115,10 @@ class PollsViewer extends Component {
     const { poll, polls, pollList, match: { params } } = this.props;
     return (
       <div className="content-box">
-        <div className="title">
-          {state.title}
-        </div>
+        <div
+          className="title"
+          dangerouslySetInnerHTML={{ __html: state.title }}
+        />
         <div className="body">
           {poll.requestReceived > 0 &&
             <Alert
@@ -143,6 +153,7 @@ class PollsViewer extends Component {
             currentPage={Number(params.page) || 1}
             view={params.mode}
             paginate={true}
+            canSort={params.mode === 'popular' ? false : true}
             sortStatus={state.sortStatus}
           />
           <ReactModal

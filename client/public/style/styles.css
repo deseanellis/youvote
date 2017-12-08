@@ -248,6 +248,10 @@ div.main-container .fa-check {
    color: #4f8a10;
 }
 
+div.main-container .fa-fire {
+   color: #f39b3e;
+}
+
 div.main-container div.actions button[class*="btn--action-"] {
    width: 60px;
    height: 60px;

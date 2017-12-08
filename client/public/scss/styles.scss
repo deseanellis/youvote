@@ -77,6 +77,9 @@ div.main-container {
   .fa-check {
     color: $message-color-success;
   }
+  .fa-fire {
+    color: $action-color-primary;
+  }
   div.actions {
     button[class*="btn--action-"] {
       width: $header-height;

@@ -8,6 +8,11 @@ const POLL_VIEW_OPTIONS = [
     authenticationRequired: true
   },
   {
+    title: '<i class="fa fa-fire" aria-hidden="true"></i> Most Popular Polls',
+    url: '/poll/viewer/popular',
+    authenticationRequired: false
+  },
+  {
     title: 'View All Polls',
     url: '/poll/viewer/all',
     authenticationRequired: false
@@ -160,9 +165,10 @@ class Sidebar extends Component {
       }
       return (
         <li key={i}>
-          <a href={pollLink.url}>
-            {pollLink.title}
-          </a>
+          <a
+            href={pollLink.url}
+            dangerouslySetInnerHTML={{ __html: pollLink.title }}
+          />
         </li>
       );
     });
