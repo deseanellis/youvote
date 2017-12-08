@@ -12,6 +12,7 @@ class Sidebar extends Component {
 
   render() {
     const { user } = this.props;
+    console.log(user);
     return (
       <div className="sidebar-container">
         <div className="logo-container">
@@ -77,28 +78,30 @@ class Sidebar extends Component {
                 </li>
               </ul>
             </div>
-            <div className="menu-item-2">
-              <div className="heading">
-                <div className="icon">
-                  <i className="fa fa-id-card-o" aria-hidden="true" />
+            {user &&
+              user._id &&
+              <div className="menu-item-2">
+                <div className="heading">
+                  <div className="icon">
+                    <i className="fa fa-id-card-o" aria-hidden="true" />
+                  </div>
+                  <div className="title"> My Profile</div>
+                  <div className="caret">
+                    <i className="fa fa-chevron-down" aria-hidden="true" />
+                  </div>
                 </div>
-                <div className="title"> My Profile</div>
-                <div className="caret">
-                  <i className="fa fa-chevron-down" aria-hidden="true" />
-                </div>
-              </div>
-              <ul className="list-heading-2">
-                <li>
-                  <a href="/basicinformation">Basic Information</a>
-                </li>
-                <li>
-                  <a href="/changepassword">Change Password</a>
-                </li>
-                <li>
-                  <a href="/api/user/logout">Logout</a>
-                </li>
-              </ul>
-            </div>
+                <ul className="list-heading-2">
+                  <li>
+                    <a href="/basicinformation">Basic Information</a>
+                  </li>
+                  <li>
+                    <a href="/changepassword">Change Password</a>
+                  </li>
+                  <li>
+                    <a href="/api/user/logout">Logout</a>
+                  </li>
+                </ul>
+              </div>}
             <div
               className="footnotes"
               dangerouslySetInnerHTML={{
