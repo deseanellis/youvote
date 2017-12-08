@@ -1,6 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+const POLL_VIEW_OPTIONS = [
+  {
+    title: 'Create New Poll',
+    url: '/poll/mode/create',
+    authenticationRequired: true
+  },
+  {
+    title: 'View All Polls',
+    url: '/poll/viewer/all',
+    authenticationRequired: false
+  },
+  {
+    title: 'View My Polls',
+    url: '/poll/viewer/personal',
+    authenticationRequired: true
+  },
+  {
+    title: 'View Polls Voted On',
+    url: '/poll/viewer/voted',
+    authenticationRequired: true
+  }
+];
 class Sidebar extends Component {
   constructor() {
     super();
@@ -64,18 +86,7 @@ class Sidebar extends Component {
                 </div>
               </div>
               <ul className="list-heading-1">
-                <li>
-                  <a href="/poll/mode/create">Create New Poll</a>
-                </li>
-                <li>
-                  <a href="/poll/viewer/all">View All Polls</a>
-                </li>
-                <li>
-                  <a href="/poll/viewer/personal">View My Polls</a>
-                </li>
-                <li>
-                  <a href="/poll/viewer/voted">View Polls Voted On</a>
-                </li>
+                {this.buildPollLinks(POLL_VIEW_OPTIONS, user)}
               </ul>
             </div>
             {user &&
@@ -139,6 +150,22 @@ class Sidebar extends Component {
       return { __html };
     }
     return { __html: '' };
+  }
+
+  buildPollLinks(pollLinks, user) {
+    var isLoggedIn = user && user._id ? true : false;
+    return pollLinks.map((pollLink, i) => {
+      if (pollLink.authenticationRequired && !isLoggedIn) {
+        return false;
+      }
+      return (
+        <li key={i}>
+          <a href={pollLink.url}>
+            {pollLink.title}
+          </a>
+        </li>
+      );
+    });
   }
 }
 
