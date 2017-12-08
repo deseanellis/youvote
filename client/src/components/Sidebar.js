@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 const POLL_VIEW_OPTIONS = [
   {
-    title: 'Create New Poll',
-    url: '/poll/mode/create',
-    authenticationRequired: true
-  },
-  {
     title: '<i class="fa fa-fire" aria-hidden="true"></i> Most Popular Polls',
     url: '/poll/viewer/popular',
     authenticationRequired: false
+  },
+  {
+    title: 'Create New Poll',
+    url: '/poll/mode/create',
+    authenticationRequired: true
   },
   {
     title: 'View All Polls',
@@ -28,6 +28,25 @@ const POLL_VIEW_OPTIONS = [
     authenticationRequired: true
   }
 ];
+
+const PROFILE_VIEW_OPTIONS = [
+  {
+    title: 'Basic Information',
+    url: '/basicinformation',
+    socialCanAccess: false
+  },
+  {
+    title: 'Change Password',
+    url: '/changepassword',
+    socialCanAccess: false
+  },
+  {
+    title: 'Logout',
+    url: '/api/user/logout',
+    socialCanAccess: true
+  }
+];
+
 class Sidebar extends Component {
   constructor() {
     super();
@@ -39,7 +58,6 @@ class Sidebar extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(user);
     return (
       <div className="sidebar-container">
         <div className="logo-container">
@@ -107,15 +125,7 @@ class Sidebar extends Component {
                   </div>
                 </div>
                 <ul className="list-heading-2">
-                  <li>
-                    <a href="/basicinformation">Basic Information</a>
-                  </li>
-                  <li>
-                    <a href="/changepassword">Change Password</a>
-                  </li>
-                  <li>
-                    <a href="/api/user/logout">Logout</a>
-                  </li>
+                  {this.buildProfileLinks(PROFILE_VIEW_OPTIONS, user)}
                 </ul>
               </div>}
             <div
@@ -157,6 +167,21 @@ class Sidebar extends Component {
     return { __html: '' };
   }
 
+  buildProfileLinks(profileLinks, user) {
+    return profileLinks.map((profileLink, i) => {
+      if (!profileLink.socialCanAccess && user.isSocial) {
+        return false;
+      }
+      return (
+        <li key={i}>
+          <a
+            href={profileLink.url}
+            dangerouslySetInnerHTML={{ __html: profileLink.title }}
+          />
+        </li>
+      );
+    });
+  }
   buildPollLinks(pollLinks, user) {
     var isLoggedIn = user && user._id ? true : false;
     return pollLinks.map((pollLink, i) => {
